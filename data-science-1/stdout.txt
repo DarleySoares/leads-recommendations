@@ -20,4 +20,4 @@ C:\ProgramData\Anaconda3\lib\site-packages\_pytest\junitxml.py:436
 
 -- Docs: https://docs.pytest.org/en/latest/warnings.html
 - generated xml file: C:\Users\Darley Soares\codenation\data-science-1\output.xml -
-======================== 5 passed, 1 warning in 5.15s =========================
+======================== 5 passed, 1 warning in 21.75s ========================
