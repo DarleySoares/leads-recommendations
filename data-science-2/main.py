@@ -68,7 +68,7 @@ def get_sample(df, col_name, n=100, seed=42):
 
 
 # Sua análise começa aqui.
-print('Shape:{0}'.format(athletes.shape))
+print(f'Shape:{athletes.shape}')
 athletes.head()
 
 
