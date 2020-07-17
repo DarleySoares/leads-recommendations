@@ -4,6 +4,9 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import seaborn as sns
 import time
+import pystaticplot as ps
+
+obj = ps.dataviz()
 
 def style():
     with open('style.css') as f:
@@ -30,6 +33,11 @@ def analysis_data():
 
 if __name__ == '__main__':
     style()
+    obj.progress_chart(56,4)
+    st.pyplot(transparent = True)
+    obj.bar_chart(labels = ['A','B'], values = [10,20], axes = [])
+    st.pyplot(transparent = True)
+
     df = input_data()
 
     if df is not None:
