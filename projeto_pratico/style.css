@@ -3,6 +3,11 @@ body {
     color: #1B1B2F;
 }
 
+.fullScreenFrame> div {
+    display: flex;
+    justify-content: center;
+}
+
 .stFileUploader>div>div {
     background-color: #A81D59;
 }
@@ -18,18 +23,21 @@ body {
 
 .stTable>table {
     background-color: #FFFFFF;
-    color: #1B1B2F;
+    color: #FFFFFF;
 }
 
 .stDataFrame>img {
     background-color: #FFFFFF;
-    color: #1B1B2F;
+    color: #FFFFFF;
 }
 
 .stImage> div {
     background-color:#1B1B2F;
+    max-height: 100 px;
+    max-width: 200 px;
 }
 
-.stApp>div>section>div>div>div>div>div {
-    background-color:#1B1B2F;
+.stImage>img{
+    max-height: 100 px;
+    max-width: 200 px;
 }
