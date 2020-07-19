@@ -1,27 +1,43 @@
 body {
-    background-color:#101419;
-    color: #101419;
+    background-color:#1B1B2F;
+    color: #1B1B2F;
+}
+
+.fullScreenFrame> div {
+    display: flex;
+    justify-content: center;
 }
 
 .stFileUploader>div>div {
-    background-color: #ADD9F4;
+    background-color: #A81D59;
 }
 
 .stFileUploader>div>div>div {
-    color: #101419;
+    color: #FFFFFF;
 }
 
 .stFileUploader>div>div>button {
-    color: #476C9B;
+    color: #2AD5F5;
 }
 
 
 .stTable>table {
-    background-color: #CCCCCC;
-    color: #101419;
+    background-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
-.stDataFrame>div>div {
-    background-color: #CCCCCC;
-    color: #101419;
+.stDataFrame>img {
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+}
+
+.stImage> div {
+    background-color:#1B1B2F;
+    max-height: 100 px;
+    max-width: 200 px;
+}
+
+.stImage>img{
+    max-height: 100 px;
+    max-width: 200 px;
 }
