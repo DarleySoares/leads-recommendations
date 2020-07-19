@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd 
 import numpy as np 
 import matplotlib.pyplot as plt 
+<<<<<<< HEAD
+=======
+import seaborn as sns
+import time
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a
 import pystaticplot as ps
 
 obj = ps.dataviz()
@@ -31,8 +36,15 @@ def analysis_data():
 
 if __name__ == '__main__':
     style()
+<<<<<<< HEAD
     fig = obj.progress_chart(56,4, fname = 'progress.png')
     st.image('progress.png', width = 300)
+=======
+    fig = obj.progress_chart(56,4)
+    st.image('images/figsize.png', width = 300)
+
+    df = input_data()
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a
 
     fig = obj.gauge(78, fname = 'gauge.png')
     st.image('gauge.png', width = 300)
@@ -40,6 +52,7 @@ if __name__ == '__main__':
     x = np.linspace(-np.pi, np.pi, 1000)
     y = np.sin(x)
 
+<<<<<<< HEAD
     fig = obj.line_chart(x = [x], y = [y], fname = 'line.png')
     st.image('line.png', width = 600)
 
@@ -60,3 +73,5 @@ if __name__ == '__main__':
     if df is not None:
         st.dataframe(df)
 
+=======
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a

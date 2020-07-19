@@ -100,7 +100,11 @@ class dataviz:
 
         # generates the shadow below the lines
         for i in range(0, len(x)):
+<<<<<<< HEAD
             ax.fill_between(x = x[i], y1 = y[i],y2 = np.array(y[i]).min()+ 0.2*np.array(y[i]).min(), color = self.colors[i], alpha = 0.08)
+=======
+            ax.fill_between(x = x[i], y1 = y[i],y2 = np.array(y[i]).min(), color = self.colors[i], alpha = 0.08)
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a
 
         # generates the legend
         if legend == None:
@@ -116,11 +120,19 @@ class dataviz:
             plt.setp(text, color = self.color_labels)
 
         # set x and y limits
+<<<<<<< HEAD
         minn = np.array(x).min()
         maxx = np.array(x).max()
         plt.xlim(minn,maxx)
 
         minn = np.array(y).min() + 0.2*np.array(y).min()
+=======
+        minn = np.array(x).min() - 0.2*np.array(x).min()
+        maxx = np.array(x).max() + 0.2*np.array(x).max()
+        plt.xlim(minn,maxx)
+
+        minn = np.array(y).min() - 0.2*np.array(y).min()
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a
         maxx = np.array(y).max() + 0.2*np.array(y).max()
         plt.ylim(minn,maxx)
 
@@ -147,7 +159,11 @@ class dataviz:
             Grid flag
         """
 
+<<<<<<< HEAD
         fig, ax = self.generates_figure(axes = axes, grid = grid, axes_labels= axes_labels)
+=======
+        ax = self.generates_figure(axes = axes, grid = grid, axes_labels= axes_labels)
+>>>>>>> 40d922cb2002c08aa19016773a199f889611a44a
 
         # set the width of the bars
         width = 0.8/len(values)
