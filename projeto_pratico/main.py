@@ -31,27 +31,27 @@ def analysis_data():
 
 if __name__ == '__main__':
     style()
-    fig = obj.progress_chart(56,4, fname = 'progress.png')
-    st.image('progress.png', width = 300)
+    fig = obj.progress_chart(56,4, fname = 'output/progress.png')
+    st.image('output/progress.png', width = 300)
 
-    fig = obj.gauge(78, fname = 'gauge.png')
-    st.image('gauge.png', width = 300)
+    fig = obj.gauge(78, fname = 'output/gauge.png')
+    st.image('output/gauge.png', width = 300)
 
     x = np.linspace(-np.pi, np.pi, 1000)
     y = np.sin(x)
 
-    fig = obj.line_chart(x = [x], y = [y], fname = 'line.png')
-    st.image('line.png', width = 600)
+    fig = obj.line_chart(x = [x], y = [y], fname = 'output/line.png')
+    st.image('output/line.png', width = 600)
 
     labels = ['A', 'B', 'C', 'D']
     women = [1,3,4,5]
     men = [3,2,5,1]
 
-    fig = obj.bar_chart(labels = labels, values = [women, men], fname = 'bar.png')
-    st.image('bar.png', width = 600)
+    fig = obj.bar_chart(labels = labels, values = [women, men], fname = 'output/bar.png')
+    st.image('output/bar.png', width = 600)
 
-    fig = obj.horizontal_bar_chart(labels = labels, values = women, fname= 'horizontal_bar.png')
-    st.image('horizontal_bar.png', width = 700)
+    fig = obj.horizontal_bar_chart(labels = labels, values = women, fname= 'output/horizontal_bar.png')
+    st.image('output/horizontal_bar.png', width = 700)
 
     # TESTE
 
