@@ -7,7 +7,7 @@ from pylab import *
 
 class dataviz:
 
-    def __init__(self, background  = '#1B1B2F', auxiliary_background ='#22223D', colors = ['#F54291','#2AD5F5','#F5E55B','#A81D59','#2594A8'], color_labels = '#FFFFFF', palette = 'RdPu'):
+    def __init__(self, background  = '#1B1B2F', auxiliary_background ='#22223D', colors = ['#F63366','#2AD5F5','#F5E55B','#A81D59','#2594A8', '#A89914'], color_labels = '#FFFFFF', palette = 'RdPu'):
         self.background = background
         self.auxiliary_background = auxiliary_background
         self.colors = colors
@@ -32,7 +32,7 @@ class dataviz:
         """
 
         # generates the figure and axes
-        fig, ax = plt.subplots(facecolor = self.background)
+        fig, ax = plt.subplots(facecolor = self.background, figsize = (12,7))
         # set background color
         ax = plt.gca()
         ax.set_facecolor(self.background)
@@ -247,7 +247,7 @@ class dataviz:
         """
 
         # generates the figure
-        fig, ax = plt.subplots(facecolor = self.background, figsize =(7, len(labels)))
+        fig, ax = plt.subplots(facecolor = self.background, figsize =(12, len(labels)))
         ax = plt.gca()
         ax.set_facecolor(self.background)
 
