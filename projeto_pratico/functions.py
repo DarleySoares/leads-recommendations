@@ -145,7 +145,6 @@ def testar():
         df = None
         df = input_data()
         
-
         # Seleção do número de leads que serão retornadas
         n_leads =  st.sidebar.slider('Número de leads', 0, 100, 20)
 
