@@ -51,17 +51,6 @@ def sidebar():
 
     return
 
-# Função para leitura do dataset de teste
-def input_data():
-    file = None
-    file = st.sidebar.file_uploader('',type = 'csv')
-    
-    if file is not None:
-        df = pd.read_csv(file)
-        st.sidebar.markdown('Dados carregados com sucesso!')
-
-        return df
-
 # Função da página de Introdução
 def introducao():
 
@@ -142,20 +131,30 @@ def testar():
         pass
 
     elif modo == 'Carregar base de dados':
-        df = None
-        df = input_data()
-        
-        # Seleção do número de leads que serão retornadas
-        n_leads =  st.sidebar.slider('Número de leads', 0, 100, 20)
 
-        if df is not None:
-            # Realiza as análises do portfólio
-            st.image('images/analise_portfolio.png')
-            analises('fornecido', df)
-            
-            # Realiza a geração de leads 
-            st.image('images/gerando_leads.png')
-            gerar_leads(df, n_leads)
+        file = st.sidebar.file_uploader('',type = 'csv')
+
+        if file is not None:
+            df = pd.read_csv(file)
+
+            if df.shape[1] <= 2:
+                market_label = pd.read_csv('../../market_preprocessing.csv')
+                portfolio = df.id
+
+                # verifica quais as labels dos ids que estão no portfolio
+                df = market_label[market_label['id'].isin(portfolio)]        
+        
+            # Seleção do número de leads que serão retornadas
+            n_leads =  st.sidebar.slider('Número de leads', 0, 100, 20)
+
+            if df is not None:
+                # Realiza as análises do portfólio
+                st.image('images/analise_portfolio.png')
+                analises('fornecido', df)
+                
+                # Realiza a geração de leads 
+                st.image('images/gerando_leads.png')
+                gerar_leads(df, n_leads)
     return
 
 def analises(portfolio, df_pf):
@@ -197,7 +196,6 @@ def analises(portfolio, df_pf):
             segmento = obj.horizontal_bar_chart(segmentos,segmentos_valores, fname = 'output/segmento.png')
         st.image('output/segmento.png', width = 600)
 
-            
         faturamentos = list(df_pf.de_faixa_faturamento_estimado_grupo.value_counts().index)[0]
         faturamento_valor = list(df_pf.de_faixa_faturamento_estimado_grupo.value_counts().values)[0]
 
@@ -311,6 +309,8 @@ def gerar_leads(df_pf, n_leads):
     # Adiciona a string cluster antes do número
     output_df['Cluster'] = output_df.Cluster.map('Cluster {}'.format)
 
+    st.markdown('No gráfico abaixo é mostrado as recomendações que foram geradas com base no portfólio passado. Esses dados estão disponíveis para download na barra lateral e caso queira ver os clientes clique no checkbox!')
+
     # Passa as informações para o gráfico scatter 3D com os clusters, configurando a cor de cada cluster
     fig = px.scatter_3d(output_df, x = 'f3', y = 'f1', z = 'f2', 
         color = 'Cluster', color_discrete_map = {
@@ -345,7 +345,13 @@ def gerar_leads(df_pf, n_leads):
 
     # Plota o gráfico
     st.plotly_chart(fig)
+
+    check_box = st.checkbox('Mostrar leads')
+        
+    if check_box:
+        st.dataframe(df_lead)
     
+    st.sidebar.subheader('Download leads')
     # Gera o link para download dos leads
     st.sidebar.markdown(get_table_download_link(df_lead), unsafe_allow_html=True)
 
@@ -360,5 +366,8 @@ def get_table_download_link(df):
     b64 = base64.b64encode(
         csv.encode()
     ).decode()  # some strings <-> bytes conversions necessary here
-    return f'<a href="data:file/csv;base64,{b64}" download="myfilename.csv">Download csv file</a>'
-
+    
+    b64 = base64.b64encode(
+        csv.encode()
+    ).decode()  # some strings <-> bytes conversions necessary here
+    return f'<a href="data:file/csv;base64,{b64}" download="leads.csv">![](file://./images/download.png)</a>'
