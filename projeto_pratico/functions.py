@@ -33,7 +33,7 @@ def style():
 def sidebar():
     # Seção no menu lateral para seleção das páginas 
     st.sidebar.subheader('Menu')
-    paginas = st.sidebar.selectbox('Selecione a página', ['Introdução','Exemplos','Testar'])
+    paginas = st.sidebar.selectbox('Selecione a página', ['Introdução','Exemplos','Gerar leads'])
 
     # Retorna função de cada página
     if paginas == 'Introdução':
@@ -43,8 +43,8 @@ def sidebar():
     elif paginas == 'Exemplos':
         exemplos()
         pass
-    elif paginas == 'Testar':
-        testar()
+    elif paginas == 'Gerar leads':
+        leads()
         pass
     else:
         introducao()
@@ -64,6 +64,7 @@ def introducao():
     
     return
 
+# Função da página de exemplos
 def exemplos():
 
     # Seleção do portfólio para exibição do projeto
@@ -100,13 +101,17 @@ def exemplos():
         
     return
 
-def testar():
+# Função da página de gerar leads
+def leads():
+
+    # Seleção do modo de operação
     st.sidebar.subheader('Modos de operação')
-    # Seleção do modo de operação 
     modo = st.sidebar.selectbox('',['','Selecionar grupo','Carregar base de dados'])
 
+    # Seleção escolhida foi gerar com base nas características informadas
     if modo == 'Selecionar grupo':
 
+        # Seleção das características que podem ser informadas
         st.sidebar.subheader('Informações do grupo')
         natureza_juridica = list(market.de_natureza_juridica.unique())
         st.sidebar.multiselect('Natureza Jurídica', natureza_juridica)
@@ -130,23 +135,29 @@ def testar():
         st.sidebar.multiselect('Faixa de faturamento', faturamento)            
         pass
 
+    # Seleção escolhida foi gerar com uma base de dados
     elif modo == 'Carregar base de dados':
 
+        # Entrada no arquivo em tipo .csv
         file = st.sidebar.file_uploader('',type = 'csv')
 
+        # Realiza os próximos procedimentos se arquivo for validado
         if file is not None:
+            # Cria dataframe com o arquivo
             df = pd.read_csv(file)
 
+            # Tratativa se o  arquivo só tiver o id dos cliente
             if df.shape[1] <= 2:
                 market_label = pd.read_csv('../../market_preprocessing.csv')
                 portfolio = df.id
 
-                # verifica quais as labels dos ids que estão no portfolio
+                # Verifica quais as labels dos ids que estão no portfolio
                 df = market_label[market_label['id'].isin(portfolio)]        
         
             # Seleção do número de leads que serão retornadas
             n_leads =  st.sidebar.slider('Número de leads', 0, 100, 20)
 
+            # Gera as análises e a geração dos leads
             if df is not None:
                 # Realiza as análises do portfólio
                 st.image('images/analise_portfolio.png')
@@ -157,6 +168,7 @@ def testar():
                 gerar_leads(df, n_leads)
     return
 
+# Função para gerar as análises do portfólio
 def analises(portfolio, df_pf):
 
     st.markdown(f'Para o {portfolio} foram gerados os insights abaixo, sendo que nele contêm {df_pf.shape[0]} clientes, no qual é possível analisar os principais estados, setores, segmento, faixa salarial da empresa e nível de atividade. Caso não deseje ver essas informações marque o check box.')
@@ -212,6 +224,7 @@ def analises(portfolio, df_pf):
     
     return
 
+# Função para gerar os leads
 def gerar_leads(df_pf, n_leads):
     # Carrega o modelo preditivo
     model = pp.load_model('model.pkl')
@@ -357,17 +370,13 @@ def gerar_leads(df_pf, n_leads):
 
     return
 
+# Função para converter dataframe para csv e gerar download
 def get_table_download_link(df):
-    """Generates a link allowing the data in a given panda dataframe to be downloaded
-    in:  dataframe
-    out: href string
-    """
+
+    # Converte o dataframe dos leads para um arquivo csv
     csv = df.to_csv(index=False)
-    b64 = base64.b64encode(
-        csv.encode()
-    ).decode()  # some strings <-> bytes conversions necessary here
     
     b64 = base64.b64encode(
         csv.encode()
-    ).decode()  # some strings <-> bytes conversions necessary here
+    ).decode() 
     return f'<a href="data:file/csv;base64,{b64}" download="leads.csv"> ![](https://raw.githubusercontent.com/DarleySoares/codenation_data_science/master/projeto_pratico/images/download.png?token=AMWWAS4QTWDSUYR4SEA6YTS7FN52I) </a>'
