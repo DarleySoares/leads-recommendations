@@ -172,53 +172,68 @@ def leads():
 def analises(portfolio, df_pf):
 
     st.markdown(f'Para o {portfolio} foram gerados os insights abaixo, sendo que nele contêm {df_pf.shape[0]} clientes, no qual é possível analisar os principais estados, setores, segmento, faixa salarial da empresa e nível de atividade. Caso não deseje ver essas informações marque o check box.')
-        
+    
+    # Check box para mostrar análises ou não
     check_box = st.checkbox('Esconder insights')
 
+    # Se check não estiver marcado mostra as análieses
     if not check_box:
 
+        # Listas de todos os estados e valores do portfólio
         estados = list(df_pf.sg_uf.value_counts().index)
         estados_valores = list(df_pf.sg_uf.value_counts().values)
 
         st.markdown(f'Esse portfólio contém {len(estados)} estados, sendo que o estado {estados[0]} é o que representa a maior porção com {round(100*estados_valores[0]/df_pf.shape[0],2)}%.')
+        
+        # Gera gráfico de barras horizontais com os estados do portfólio
         sg_uf = obj.horizontal_bar_chart(estados, estados_valores, fname = 'output/sg_uf.png')
         st.image('output/sg_uf.png', width = 600)
 
+        # Listas de todos os setores e valores do portfólio
         setores = list(df_pf.setor.value_counts().index)
         setores_valores = list(df_pf.setor.value_counts().values)
-            
+
+        # Gera gráfico de barras horizontais com os top 5 setores do portfólio  
         if len(setores) > 5:
             st.markdown(f'Já para o número de setores, o portfólio contém {len(setores)}, sendo que o setor {setores[0]} é o que possui o maior número de clientes com {setores_valores[0]}, representando {round(100*setores_valores[0]/df_pf.shape[0],2)}%. No gráfico abaixo foram representados os 5 principais.')
             setor = obj.bar_chart(setores[:5],[setores_valores[:5]], fname = 'output/setor.png')
+        # Gera gráfico de barras horizontais com os estados do portfólio
         else:
             st.markdown(f'Já para o número de setores, o portfólio contém {len(setores)}, sendo que o setor {setores[0]} é o que possui o maior número de clientes com {setores_valores[0]}, representando {round(100*setores_valores[0]/df_pf.shape[0],2)}%.')
             setor = obj.bar_chart(setores,[setores_valores], fname = 'output/setor.png')
         st.image('output/setor.png', width =600)
 
+        # Listas de todos os segmentos e valores do portfólio
         segmentos = list(df_pf.nm_segmento.value_counts().index)
         segmentos_valores = list(df_pf.nm_segmento.value_counts().values)
 
+        # Gera gráfico de barras horizontais com os top 5 segmentos do portfólio  
         if len(segmentos) > 5:
             st.markdown(f'Para o número de segmentos, o portfólio contém {len(segmentos)}, sendo que o segmento {segmentos[0]} é o que possui o maior número de clientes, com {segmentos_valores[0]}, representando {round(100*segmentos_valores[0]/df_pf.shape[0],2)}%. No gráfico abaixo foram representados os 5 principais.')
             st.markdown(f'Legenda: {[segmentos[i] for i in range(0,4)]}')
             segmento = obj.horizontal_bar_chart(segmentos[:5],segmentos_valores[:5], fname = 'output/segmento.png')
+        # Gera gráfico de barras horizontais com os segmentos do portfólio
         else:
             st.markdown(f'Para o número de segmentos, o portfólio contém {len(segmentos)}, sendo que o segmento {segmentos[0]} é o que possui o maior número de clientes, com {segmentos_valores[0]}, representando {round(100*segmentos_valores[0]/df_pf.shape[0],2)}%.')
             st.markdown(f'Legenda: {[segmentos[i] for i in range(0,len(segmentos))]}')
             segmento = obj.horizontal_bar_chart(segmentos,segmentos_valores, fname = 'output/segmento.png')
         st.image('output/segmento.png', width = 600)
 
+        # Valor da faixa de faturamento mais exibida no portfólio
         faturamentos = list(df_pf.de_faixa_faturamento_estimado_grupo.value_counts().index)[0]
         faturamento_valor = list(df_pf.de_faixa_faturamento_estimado_grupo.value_counts().values)[0]
 
         st.markdown(f'Do total de {df_pf.shape[0]} clientes, {faturamento_valor} pertencem ao grupo de faixa salarial: {faturamentos}, esse valor representa:')
+        # Gera gráfico de progresso com quantidade representativa no todo 
         faturamento = obj.progress_chart(round(100*faturamento_valor/df_pf.shape[0],2), 2, fname = 'output/faturamento.png')
         st.image('output/faturamento.png', width = 400)
 
+        # Valor do nível de atividade mais exibido no portfólio
         atividade = list(df_pf.de_nivel_atividade.value_counts().index)[0]
         atividade_valor = list(df_pf.de_nivel_atividade.value_counts().values)[0]
 
         st.markdown(f'Do total de {df_pf.shape[0]} clientes, {atividade_valor} pertencem ao grupo de faixa salarial: {atividade}, esse valor representa:')
+        # Gera gráfico de progresso com quantidade representativa no todo 
         atividades = obj.progress_chart(round(100*atividade_valor/df_pf.shape[0],2), 2, fname = 'output/atividade.png')
         st.image('output/atividade.png', width = 400)
     
