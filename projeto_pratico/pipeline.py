@@ -30,24 +30,25 @@ def data_collection(filepath):
     return df
 
 def data_preprocessing(df):
+    
+    if df.isnull().sum().sum() > 0:
+        # realiza o filtro para selecionar somente as features que serão utilizadas no modelo
+        df = df.filter(items = ['id','de_natureza_juridica','sg_uf', 'setor', 'nm_segmento', 'idade_emp_cat','de_nivel_atividade',
+        'de_faixa_faturamento_estimado_grupo'])
 
-    # realiza o filtro para selecionar somente as features que serão utilizadas no modelo
-    df = df.filter(items = ['id','de_natureza_juridica','sg_uf', 'setor', 'nm_segmento', 'idade_emp_cat','de_nivel_atividade',
-    'de_faixa_faturamento_estimado_grupo'])
+        # todos os setores que estão nulos serão classificados na nova categoria OUTROS
+        df.setor.fillna('OUTROS', inplace = True)
 
-    # todos os setores que estão nulos serão classificados na nova categoria OUTROS
-    df.setor.fillna('OUTROS', inplace = True)
+        # todos os segmentos que estão nulos serão classificados na nova categoria OUTROS
+        df.nm_segmento.fillna('OUTROS', inplace =  True)
 
-    # todos os segmentos que estão nulos serão classificados na nova categoria OUTROS
-    df.nm_segmento.fillna('OUTROS', inplace =  True)
+        # para os dados que estiverem com dado nulo será inserido a categoria que mais se repete
+        df.de_faixa_faturamento_estimado_grupo.fillna(df.de_faixa_faturamento_estimado_grupo.mode().values[0], inplace = True)
 
-    # para os dados que estiverem com dado nulo será inserido a categoria que mais se repete
-    df.de_faixa_faturamento_estimado_grupo.fillna(df.de_faixa_faturamento_estimado_grupo.mode().values[0], inplace = True)
-
-    # para os dados que estiverem com dado nulo será inserido a categoria que mais se repete, porém será realizado um group 
-    # by a partir do nível de ativade da empresa
-    faixa_faturamento_por_nivel = df.groupby(['de_faixa_faturamento_estimado_grupo'])['de_nivel_atividade'].agg(pd.Series.mode)
-    df.de_nivel_atividade.fillna(df.de_faixa_faturamento_estimado_grupo.map(faixa_faturamento_por_nivel), inplace = True)
+        # para os dados que estiverem com dado nulo será inserido a categoria que mais se repete, porém será realizado um group 
+        # by a partir do nível de ativade da empresa
+        faixa_faturamento_por_nivel = df.groupby(['de_faixa_faturamento_estimado_grupo'])['de_nivel_atividade'].agg(pd.Series.mode)
+        df.de_nivel_atividade.fillna(df.de_faixa_faturamento_estimado_grupo.map(faixa_faturamento_por_nivel), inplace = True)
 
     df_return = df.copy()
 

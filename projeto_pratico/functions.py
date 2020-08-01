@@ -18,10 +18,13 @@ def get_market():
     market = pd.read_csv('../../market_preprocessing.csv')
     return market
 
+# Gera o market
 global market
 market = get_market()
+# Carrega o modelo
 global model
 model = pp.load_model('model.pkl')
+# Gera classe para exibições
 obj = ps.dataviz()
 
 # Função para estilizar a página
@@ -86,6 +89,9 @@ def exemplos():
         pass
     elif portfolio == 'Portfólio 3':
         df_pf = pp.get_portfolio('data/estaticos_portfolio3.csv', '../../market_preprocessing.csv')
+    else:
+        # Imagem para selecionar uma opção
+        st.image('images/selecionar_opcao.png')
         pass
 
     # Ações quando um portfólio é carregado
@@ -113,26 +119,58 @@ def leads():
 
         # Seleção das características que podem ser informadas
         st.sidebar.subheader('Informações do grupo')
+
         natureza_juridica = list(market.de_natureza_juridica.unique())
-        st.sidebar.multiselect('Natureza Jurídica', natureza_juridica)
+        natureza_juridica = st.sidebar.multiselect('Natureza Jurídica', natureza_juridica)
             
         uf = list(market.sg_uf.unique())
-        st.sidebar.multiselect('Estado', uf)
+        uf = st.sidebar.multiselect('Estado', uf)
 
         setor = list(market.setor.unique())
-        st.sidebar.multiselect('Setor', setor)
+        setor = st.sidebar.multiselect('Setor', setor)
 
         segmento = list(market.nm_segmento.unique())
-        st.sidebar.multiselect('Segmento', segmento)
+        segmento = st.sidebar.multiselect('Segmento', segmento)
 
-        idadeEmpresa = list(market.idade_emp_cat.unique())
-        st.sidebar.multiselect('Idade da empresa', idadeEmpresa)
+        idade_empresa = list(market.idade_emp_cat.unique())
+        idade_empresa = st.sidebar.multiselect('Idade da empresa', idade_empresa)
 
-        nivelAtividade = list(market.de_nivel_atividade.unique())
-        st.sidebar.multiselect('Nível de ativade', nivelAtividade)
+        nivel_atividade = list(market.de_nivel_atividade.unique())
+        nivel_atividade = st.sidebar.multiselect('Nível de ativade', nivel_atividade)
 
         faturamento = list(market.de_faixa_faturamento_estimado_grupo.unique())
-        st.sidebar.multiselect('Faixa de faturamento', faturamento)            
+        faturamento = st.sidebar.multiselect('Faixa de faturamento', faturamento)     
+
+        # Lista com a features selecionadas
+        features = list([natureza_juridica, uf, setor, segmento, idade_empresa, nivel_atividade, faturamento])
+
+        if natureza_juridica != [] and uf != [] and setor != [] and segmento != [] and idade_empresa != [] and faturamento != []:
+            
+            # Seleção do número de leads que serão retornadas
+            n_leads =  st.sidebar.slider('Número de leads', 0, 100, 20)
+
+            # Cria as features, associando randomicamente entre elas
+            values = []
+            for i in range(0, 100):
+                for x in range(0, len(features)):
+                    if len(features[x]) < 100:
+                        features[x].append(np.random.choice(features[x]))
+                
+                values.append([i,natureza_juridica[i], uf[i], setor[i], segmento[i], idade_empresa[i], nivel_atividade[i], faturamento[i]])
+            
+            #  Cria um dataframe com as features
+            features = pd.DataFrame(values)
+            # Renomeia as colunas conforme market original
+            features.columns = ['id', 'de_natureza_juridica','sg_uf', 'setor', 'nm_segmento', 'idade_emp_cat','de_nivel_atividade', 'de_faixa_faturamento_estimado_grupo']
+
+            # Realiza a geração de leads 
+            st.image('images/gerando_leads.png')
+            gerar_leads(features, n_leads)
+        
+        else:
+            # Imagem para selecionar uma opção
+            st.image('images/carregar_dados.png')
+            
         pass
 
     # Seleção escolhida foi gerar com uma base de dados
@@ -166,6 +204,13 @@ def leads():
                 # Realiza a geração de leads 
                 st.image('images/gerando_leads.png')
                 gerar_leads(df, n_leads)
+        else:
+            # Imagem para selecionar uma opção
+            st.image('images/carregar_dados.png')
+    
+    else:
+        # Imagem para selecionar uma opção
+        st.image('images/selecionar_opcao.png')
     return
 
 # Função para gerar as análises do portfólio
