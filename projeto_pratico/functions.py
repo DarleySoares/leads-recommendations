@@ -438,4 +438,4 @@ def get_table_download_link(df):
     b64 = base64.b64encode(
         csv.encode()
     ).decode() 
-    return f'<a href="data:file/csv;base64,{b64}" download="leads.csv"> ![](https://raw.githubusercontent.com/DarleySoares/codenation_data_science/master/projeto_pratico/images/download.png?token=AMWWAS77BGTL3AUVDHPMHX27GCDIM) </a>'
+    return f'<a href="data:file/csv;base64,{b64}" download="leads.csv"> ![](https://raw.githubusercontent.com/DarleySoares/codenation_data_science/master/projeto_pratico/images/download.png?token=AMWWASYQ6LOTJGXMP44Z7XC7GCFF2) </a>'
