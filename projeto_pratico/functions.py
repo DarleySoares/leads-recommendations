@@ -14,7 +14,7 @@ import base64
 @st.cache(suppress_st_warning = True, show_spinner = False, )
 def get_market():
     global market 
-    market = pd.read_csv('../../market_preprocessing.csv')
+    market = pd.read_csv('data/market_preprocessing.csv')
     return market
 
 # Gera o market
@@ -81,13 +81,13 @@ def exemplos():
 
     # Seleção de qual portfólio carregar
     if portfolio == 'Portfólio 1':
-        df_pf = pp.get_portfolio('data/estaticos_portfolio1.csv', '../../market_preprocessing.csv')
+        df_pf = pp.get_portfolio('data/estaticos_portfolio1.csv', 'data/market_preprocessing.csv')
         pass
     elif portfolio == 'Portfólio 2':
-        df_pf = pp.get_portfolio('data/estaticos_portfolio2.csv', '../../market_preprocessing.csv')
+        df_pf = pp.get_portfolio('data/estaticos_portfolio2.csv', 'data/market_preprocessing.csv')
         pass
     elif portfolio == 'Portfólio 3':
-        df_pf = pp.get_portfolio('data/estaticos_portfolio3.csv', '../../market_preprocessing.csv')
+        df_pf = pp.get_portfolio('data/estaticos_portfolio3.csv', 'data/market_preprocessing.csv')
     else:
         # Imagem para selecionar uma opção
         st.image('images/selecionar_opcao.png')
@@ -185,7 +185,7 @@ def leads():
 
             # Tratativa se o  arquivo só tiver o id dos cliente
             if df.shape[1] <= 2:
-                market_label = pd.read_csv('../../market_preprocessing.csv')
+                market_label = pd.read_csv('data/market_preprocessing.csv')
                 portfolio = df.id
 
                 # Verifica quais as labels dos ids que estão no portfolio

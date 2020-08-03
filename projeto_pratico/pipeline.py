@@ -113,7 +113,7 @@ def load_model(filepath):
 def save_data(df, kmeans):
 
     df['label'] = kmeans.labels_
-    df.to_csv('../../market_preprocessing.csv', index = False)
+    df.to_csv('data/market_preprocessing.csv', index = False)
 
 def predict(kmeans, features):
 
