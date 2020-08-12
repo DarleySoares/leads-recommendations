@@ -47,6 +47,7 @@ Na página de gerar leads o usuário pode selecionar entre dois modos de operaç
 <p align="center">
     <img alt="Carregar base de dados" src="images/gerar_leads_portfolio.gif" width="500px">
 </p>
+
 ## Tecnologias
 
 - [Python](https://www.python.org/)
