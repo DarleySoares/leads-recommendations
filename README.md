@@ -6,6 +6,12 @@
     AceleraDev Data Science - Projeto Prático 🧲
 </h4>
 
+<p align= "right">
+    <a href = "https://github.com/DarleySoares/leads-recommendations/blob/deploy/README.md"><img src = https://raw.githubusercontent.com/DarleySoares/Data-Science/master/images/brazil.png></a>
+    <a href = "https://github.com/DarleySoares/leads-recommendations/blob/deploy/README_ENG.md"><img src = https://raw.githubusercontent.com/DarleySoares/Data-Science/master/images/usa.png></a>
+ </p1>
+
+
 Um sistema de recomendação é dito como a combinação de várias técnicas computacionais para selecionar itens personalizados com base nos interesses dos usuários e conforme o contexto no qual estão inseridos. Nesse projeto o sistema de recomendação está relacionado a possíveis leads. Com base nas características dos atuais clientes o sistema recomenda outros possíveis clientes por perfil semelhante.
 
 **O que são leads?**
