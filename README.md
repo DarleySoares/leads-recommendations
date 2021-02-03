@@ -1,13 +1,14 @@
 <h1 align="center">
     <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
-    <p align= "center" style = "font-size: 8px">
-        Clique na imagem acima para ir para a aplicação
-    </p>
 </h1>
 
 <h4 align="center">
     AceleraDev Data Science - Projeto Prático 🧲
 </h4>
+
+<p align= "center" style = "font-size: 8px">
+        Clique na imagem acima para ir para a aplicação
+</p>
 
 <p align= "right">
     <a href = "https://github.com/DarleySoares/leads-recommendations/blob/deploy/README.md"><img src = https://raw.githubusercontent.com/DarleySoares/Data-Science/master/images/brazil.png></a>
