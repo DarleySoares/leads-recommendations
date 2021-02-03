@@ -3,7 +3,7 @@
 </h1>
 
 <h5 align= "center">
-    <p1 "Clique na imagem acima para ir para a aplicação" /p1>
+    Clique na imagem acima para ir para a aplicação
  </h5>
 
 <h4 align="center">
