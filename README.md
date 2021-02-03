@@ -1,11 +1,10 @@
 <h1 align="center">
     <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
-     <p1 "Clique na imagem acima para ir para a aplicação" /p1>
 </h1>
 
-<p1 align= "right">
-    <a href = "https://leads-recommendations.herokuapp.com/"></a>
- </p1>
+<h5 align= "center">
+    <p1 "Clique na imagem acima para ir para a aplicação" /p1>
+ </h5>
 
 <h4 align="center">
     AceleraDev Data Science - Projeto Prático 🧲
