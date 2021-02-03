@@ -1,6 +1,6 @@
 <h1 align="center">
-    <img alt="Leads Recommendation" title="#BeTheHero" src="images/leads_recommendation.png" width="250px" />
     <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
+    <a Clique na imagem acima para ir para a aplicação /a>
 </h1>
 
 <p align= "right">
