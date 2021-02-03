@@ -1,6 +1,8 @@
 <h1 align="center">
     <img alt="Leads Recommendation" title="#BeTheHero" src="images/leads_recommendation.png" width="250px" />
+    [Aplicativo](https://leads-recommendations.herokuapp.com/)
 </h1>
+
 
 <h4 align="center">
     AceleraDev Data Science - Projeto Prático 🧲
