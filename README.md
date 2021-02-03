@@ -1,6 +1,6 @@
 <h1 align="center">
     <img alt="Leads Recommendation" title="#BeTheHero" src="images/leads_recommendation.png" width="250px" />
-    <a href = "https://github.com/DarleySoares/leads-recommendations/blob/deploy/README.md"><img src = "images/leads_recommendation.png" width="250px"></a>
+    <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
 </h1>
 
 <p align= "right">
