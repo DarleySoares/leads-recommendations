@@ -1,9 +1,9 @@
 <h1 align="center">
     <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
-    Clique na imagem acima para ir para a aplicação 
+     <p1 "Clique na imagem acima para ir para a aplicação" /p1>
 </h1>
 
-<p align= "right">
+<p1 align= "right">
     <a href = "https://leads-recommendations.herokuapp.com/"></a>
  </p1>
 
