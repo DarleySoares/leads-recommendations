@@ -1,8 +1,8 @@
 <h1 align="center">
     <a href = "https://leads-recommendations.herokuapp.com/"><img src = "images/leads_recommendation.png" width="250px"></a>
-    <h5 align= "center">
+    <p align= "center">
         Clique na imagem acima para ir para a aplicação
-    </h5>
+    </p>
 </h1>
 
 <h4 align="center">
